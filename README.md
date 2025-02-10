@@ -46,3 +46,6 @@ Follow the setup instructions here:
 
 ```
 cd examples
+python drums_example.py # create a drum track in the first clip of the first track in Ableton Live
+python drums_example_midi.py # export a drum track to a midi file
+```
