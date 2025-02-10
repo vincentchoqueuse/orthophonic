@@ -24,3 +24,25 @@ pip install -r requirements.txt
 ```bash
 pip install -e .
 ```
+
+Here’s an improved version of your **README** section with better clarity, structure, and formatting:
+
+---
+
+### 🎵 **Note for Ableton Users**  
+
+You can send information directly to **Ableton Live** using **PyLive**:  
+🔗 [PyLive GitHub Repository](https://github.com/ideoforms/pylive)  
+
+To enable this functionality, you need to install **Remote Scripts** in Ableton’s folder and configure **Ableton Live** accordingly.  
+
+📌 **Installation Guide:**  
+
+Follow the setup instructions here:  
+🔗 [AbletonOSC Installation Guide](https://github.com/ideoforms/AbletonOSC?tab=readme-ov-file#installation)  
+
+
+## Run some example
+
+```
+cd examples
