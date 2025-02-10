@@ -1,0 +1,6 @@
+numpy
+scipy
+pylive
+midiutil
+sphinx-rtd-theme
+sphinx-autodoc-typehints
