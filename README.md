@@ -8,7 +8,7 @@
 - **Harmonic & Rhythmic Generation**: Supports **equal temperament**, **custom scales**, and **rhythmic patterns**.
 - **Grid-Based Event Placement**: Uses a **master grid** for time and frequency structuring.
 - **Customizable Phase & Frequency Modulation**: Enables fine control over rhythm and pitch via local oscillators.
-- **Seamless Integration**: Works with **Ableton Live
+- **Seamless Integration**: Works with **Ableton Live**
 
 ## 📦 Installation
 
