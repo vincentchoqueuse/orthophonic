@@ -12,22 +12,18 @@
 
 ## 📦 Installation
 
-> Work with python 3.12
 
-To install Orthophonic, simply run:
-
+* Install the requirements:
 
 ```bash
 pip install -r requirements.txt
 ```
 
+* Install the library 
+
 ```bash
 pip install -e .
 ```
-
-Here’s an improved version of your **README** section with better clarity, structure, and formatting:
-
----
 
 ### 🎵 **Note for Ableton Users**  
 
