@@ -18,7 +18,7 @@ class Vector:
         Parameters
         ----------
         data : int, list, or np.ndarray
-            - If `data` is an integer, creates a vector of zeros with size `data`.
+            - If `data` is an integer or float, use an array of size 1
             - If `data` is a list or np.ndarray, uses it as the vector content.
 
         Raises
@@ -26,8 +26,8 @@ class Vector:
         ValueError
             If the input data type is invalid.
         """
-        if isinstance(data, int):
-            self.array = np.zeros(data)
+        if isinstance(data, (int, float, np.int64, np.float32)):
+            self.array = np.array([data], dtype=float)
         elif isinstance(data, (list, np.ndarray)):
             self.array = np.array(data, dtype=float)
         else:
@@ -182,6 +182,19 @@ class Vector:
         array_hard = grid[np.argmin(np.abs(array_before[:, None] - grid), axis=1)]
         self.array = array_before*scale + (1-scale)*array_hard
         return self
+
+    def resize(self, length):
+        """
+        Resize a vector to a specific length by using repetition
+
+        Parameters
+        ----------
+        length: integer
+
+        """
+        self.array = np.resize(self.array, length)
+        return self
+
 
     def get_array(self, data):
         """

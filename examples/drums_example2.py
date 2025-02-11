@@ -4,7 +4,7 @@ from orthophonic.sequence import Sequence
 import live
 import numpy as np
 
-
+# initial parameters
 clip_index = 1
 track_index = 0
 sigma_time = 0.4
@@ -14,31 +14,28 @@ repeat = 4
 grid = generate_grid(N=16, repeat=repeat)
 
 # custom euclidean rhythms
-v0 = Sine_Zeros(3, 16, repeat=repeat)
-v1 = Sine_Zeros(6, 16, repeat=repeat).add(2)
-v2 = Sine_Zeros(2, 16, repeat=repeat).add(4)
-v3 = Sine_Zeros(5 , 16, repeat=repeat).add(3)
-v4 = Sine_Zeros(7, 16, repeat=repeat).add(2)
-v5 = Sine_Zeros(7, 16, repeat=repeat).add(2)
-v6 = Sine_Zeros(12, 16, repeat=repeat).add(2)
-v_list = [v0, v1, v2, v3, v4, v5]
+v_list = [
+    Sine_Zeros(4, 16, repeat=repeat),               # kick pattern
+    Sine_Zeros(2, 16, repeat=repeat).add(4),       # snare pattern
+    Sine_Zeros(5, 16, repeat=repeat).add(2),
+    Sine_Zeros(7, 16, repeat=repeat).add(1),
+    Sine_Zeros(11, 16, repeat=repeat).add(2),
+    Sine_Zeros(13, 16, repeat=repeat).add(1)
+]
 
 # generate list of pitch. Each pitch correspond to a note of a the drumkit
-pitch_list = np.array([36, 40, 43, 44, 42, 37]) + 3*12
+pitch_list = [36, 41, 44, 52, 61, 55]
 
 # connect to Ableton / create clip
 set = live.Set(scan=True)
 clip = create_clip(set, track_index, clip_index, 16, erase=True)
 
-for index, v in enumerate(v_list):
-    N = len(v)
+for index, v in enumerate(v_list[:6]):
+    pitch = pitch_list[index]
     start_time_vector = v.project(grid, scale=0).multiply(0.25)
-    pitch = pitch_list[index] * np.ones(N)
     pitch_vector = Vector(pitch)
-    if index == 6:
-        pitch_vector = pitch_vector.rvs_normal(scale=4)
-    velocity_vector = Vector(100*np.ones(N)).rvs_normal(scale=2).astype(int)
-    duration_vector = Vector(0.25*np.ones(N))
+    velocity_vector = Vector(100).rvs_normal(scale=2)
+    duration_vector = Vector(0.25)
 
     sequence = Sequence(start_time_vector, pitch_vector, velocity_vector, duration_vector)
     sequence.send_to_ableton(clip)

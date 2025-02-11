@@ -4,14 +4,14 @@ from orthophonic.utils import generate_scale, generate_grid, create_clip
 import numpy as np
 import live
 
-# intial parameters
-theta = 1/6  # minor grid (see paper)
+# initial parameters
+theta = 1/6  # minor grid (see upcoming paper)
 repeat = 4    
 clip_index = 1
 track_index = 3
 
 # generate scale from projection and master grid
-scale = generate_scale(root=40, theta=theta)
+scale = generate_scale(root=40, theta=theta) # (see upcoming paper)
 grid = generate_grid(N=16, repeat=repeat)
 
 # pitch progression (numpy spirit)
@@ -33,10 +33,15 @@ clip = create_clip(set, track_index, clip_index, 16, erase=True)
 for index, v in enumerate(v_list):
     start_time_vector = v.project(grid, scale=0).multiply(0.25)
     N = len(start_time_vector)
-    pitch = pitch_vect[index] * np.ones(int(N/repeat))
-    pitch_vector = Vector(progression).direct_sum(Vector(pitch)).project(scale)
-    velocity_vector = Vector(100*np.ones(N)).rvs_normal(scale=0).astype(int)
-    duration_vector = Vector(1.*np.ones(N))
+
+    pitch = pitch_vect[index]
+    pitch_vector = (
+        Vector(progression)
+            .direct_sum(Vector(pitch).resize(int(N/repeat)))
+            .project(scale)
+    )
+    velocity_vector = Vector(100).resize(16).rvs_normal(scale=10)
+    duration_vector = Vector(1)
 
     sequence = Sequence(start_time_vector, pitch_vector, velocity_vector, duration_vector)
     sequence.send_to_ableton(clip)

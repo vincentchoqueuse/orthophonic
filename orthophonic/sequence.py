@@ -81,11 +81,17 @@ class Sequence:
             A vector containing the duration values (default is 0.5 for all notes).
         """
         M = len(start_time_vector)
+
+        pitch_vector.resize(M).astype(int)
+
         if velocity_vector is None:
-            velocity_vector = Vector(100 * np.ones(M))
+            velocity_vector = Vector(100)
+        velocity_vector = velocity_vector.resize(M).astype(int)
     
         if duration_vector is None:
-            duration_vector = Vector(0.5 * np.ones(M))
+            duration_vector = Vector(0.5)
+
+        duration_vector = duration_vector.resize(M)
 
         note_list = []
         for m in range(M):
